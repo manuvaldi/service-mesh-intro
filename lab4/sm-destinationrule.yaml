@@ -1,0 +1,11 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: reviews
+  namespace: <REVIEWS_NS>
+spec:
+  host: reviews.<REVIEWS_NS>.svc.cluster.local
+  subsets:
+  - labels:
+      version: v1
+    name: v1

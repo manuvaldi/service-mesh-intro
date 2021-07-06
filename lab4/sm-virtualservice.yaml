@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: reviews
+  namespace: <REVIEWS_NS>
+spec:
+  gateways:
+  - <REVIEWS_NS>/reviews-gateway
+  hosts:
+  - <HOST_DECLARED_IN_GATEWAY>
+  http:
+  - route:
+    - destination:
+        host: reviews.<REVIEWS_NS>.svc.cluster.local
+        subset: v1
+      weight: 100

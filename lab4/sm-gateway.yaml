@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: reviews-gateway
+  namespace: <REVIEWS_NS>
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - reviews-<USER>.apps.<BASE_DOMAIN>
+    port:
+      name: http
+      number: 80
+      protocol: HTTP

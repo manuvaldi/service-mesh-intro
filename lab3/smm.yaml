@@ -1,0 +1,16 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: servicemeshmember
+objects:
+- apiVersion: maistra.io/v1
+  kind: ServiceMeshMember
+  metadata:
+    name: default
+  spec:
+    controlPlaneRef:
+      namespace: istio-system-${USER}
+      name: basic
+parameters:
+- description: User
+  name: USER

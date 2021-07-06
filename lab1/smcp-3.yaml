@@ -1,0 +1,62 @@
+apiVersion: maistra.io/v2
+kind: ServiceMeshControlPlane
+metadata:
+  name: custom
+spec:
+  version: v2.0
+  profiles:
+    - default
+  security:
+    dataPlane:
+      automtls: false
+      mtls: false
+    controlPlane:
+      mtls: false
+
+  tracing:
+    sampling: 10000
+    type: Jaeger
+
+  runtime:
+    components:
+      pilot:
+        deployment:
+          autoScaling:
+            enabled: false
+          replicas: 2
+
+  gateways:
+    openshiftRoute:
+      enabled: true
+    ingress:
+      runtime:
+        container:
+          resources:
+            limits:
+              cpu: "2"
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+        deployment:
+          autoScaling:
+            enabled: false
+          replicas: 2
+
+  policy:
+    type: Istiod
+
+  addons:
+    grafana:
+      enabled: false
+    jaeger:
+      install:
+        storage:
+          type: Memory
+    kiali:
+      enabled: true
+    prometheus:
+      enabled: true
+
+  telemetry:
+    type: Istiod

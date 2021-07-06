@@ -1,0 +1,20 @@
+apiVersion: maistra.io/v2
+kind: ServiceMeshControlPlane
+metadata:
+  name: basic
+spec:
+  version: v2.0
+  profiles:
+    - default
+  tracing:
+    type: None
+  gateways:
+    egress:
+      enabled: false
+  addons:
+    grafana:
+      enabled: false
+    kiali:
+      enabled: false
+    prometheus:
+      enabled: false
