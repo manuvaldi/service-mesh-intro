@@ -10,7 +10,7 @@ objects:
   spec:
     controlPlaneRef:
       namespace: istio-system-${USER}
-      name: basic
+      name: default
 parameters:
 - description: User
   name: USER
